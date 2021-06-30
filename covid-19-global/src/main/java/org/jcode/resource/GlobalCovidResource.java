@@ -8,6 +8,7 @@ import org.jcode.services.GlobalCovidServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,20 +33,25 @@ public class GlobalCovidResource {
     private GlobalCovidServiceImpl globalCovidService;
 
     @GetMapping
-    public CollectionModel<EntityModel<Country>> getAllCountries() {
+    public ResponseEntity<?> getAllCountries() {
         List<EntityModel<Country>> countries = globalCovidService.getAllCountries().getCountryList().stream() //
                 .map(countryModelAssembler::toModel)
                 .collect(Collectors.toList());
 
-        return CollectionModel.of(countries,
+        CollectionModel<EntityModel<Country>> entityModel =  CollectionModel.of(countries,
                 linkTo(methodOn(GlobalCovidResource.class).getAllCountries()).withSelfRel());
+
+        return ResponseEntity.ok(entityModel);
     }
 
     @SneakyThrows
     @GetMapping("/{countryName}")
-    public EntityModel<Country> getCountry(@PathVariable("countryName") String name) {
+    public ResponseEntity<?> getCountry(@PathVariable("countryName") String name) {
         Optional<Country> country = globalCovidService.getCountry(name);
-        return countryModelAssembler.toModel(country.get());
+
+        EntityModel <Country> entityModel = countryModelAssembler.toModel(country.get());
+
+        return ResponseEntity.ok(entityModel);
     }
 
 }
