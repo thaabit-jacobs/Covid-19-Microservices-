@@ -1,13 +1,15 @@
-package org.jcode.advice;
+package com.example.demo.advice;
 
-import org.jcode.exceptions.CountryNotFoundException;
-import org.jcode.exceptions.ExceptionModel;
+import com.example.demo.exceptions.CountryNotFoundException;
+import com.example.demo.exceptions.ExceptionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 

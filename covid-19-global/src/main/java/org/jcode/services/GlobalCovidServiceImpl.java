@@ -22,7 +22,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-@Service
 public class GlobalCovidServiceImpl{
     private static final Logger LOGGER= LoggerFactory.getLogger(GlobalCovidServiceImpl.class);
 
@@ -37,7 +36,6 @@ public class GlobalCovidServiceImpl{
     private RestTemplate restTemplate;
 
     private List<Country> countryList = new ArrayList<>();
-    private Global global = new Global();
 
     @PostConstruct
     private void fetchVirusAllData() throws IOException {
