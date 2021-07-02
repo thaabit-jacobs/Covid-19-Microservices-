@@ -1,4 +1,4 @@
-package org.jcode;
+package org.jcode.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
